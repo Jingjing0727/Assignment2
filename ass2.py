@@ -2,9 +2,9 @@ import joblib
 import streamlit as st
 import pandas as pd
 import numpy as np
+import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
-import newmodel
 
 
 ##################page_setting###########################
@@ -69,7 +69,7 @@ if page_selected == "Home":
       df_grouped = df_grouped.rename(columns={'age':'count'})
       df_grouped = df_grouped.reset_index()
 
-      import plotly.express as px
+    
       bar_chart = px.bar(df_grouped,
                        x='income_>50K',
                        y='count',
@@ -507,7 +507,7 @@ if page_selected == "Model":
   st.write("When I build models, I choose algorithms that are basically classification-based. For example: RandomForestClassifier, DecisionTreeClassifier, KNeighborsClassifier. Because of the 'age', I added an additional LogisticRegression. Among the four, RandomForestClassifier has the highest prediction. In the end, I chose RandomForestClassifier to build the model and pipeline.")
   
   if st.button('model code'):
-    with st.echo():
+    code ='''
         import pandas as pd
         import numpy as np
         from sklearn.ensemble import RandomForestClassifier
@@ -545,10 +545,11 @@ if page_selected == "Model":
             df = pd.read_csv(df_test)
             predictions = pipeline.predict(df)
             # return predictions or outcomes
-            return predictions
+            return predictions'''
+    st.code(code, language='python')
   st.write("Then we use this pipeline to predict the value of 'income_>50K' for the test dataset.")  
   if st.button('Test code'):
-      with st.echo():
+      code='''
           import pandas as pd
           import newmodel
           X, y = newmodel.load_prepare()
@@ -556,7 +557,8 @@ if page_selected == "Model":
           print('final model traning accuracy', training_accuracy)
           print('confusion matrix', confusion_matrix)
           predictions = newmodel.apply_pipeline()
-          print(predictions)
+          print(predictions)'''
+      st.code(code, language='python')
   st.write("This is my analysis of this dataset all thinking and solution. And if you want to analyze how can get income equal to or more than 50K. You can use the page 'home' or 'predict'. Those pages can predict if you can get an income equal to more than 50K. ")
 
 
