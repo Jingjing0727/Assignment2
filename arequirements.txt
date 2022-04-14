@@ -7,5 +7,6 @@ plotly
 streamlit
 seaborn
 pip
+sklearn.externals 
 
 
