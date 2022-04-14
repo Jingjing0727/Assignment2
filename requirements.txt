@@ -4,4 +4,4 @@ plotly.express==0.4.1
 seaborn == 0.11.2
 matplotlib==3.4.3
 joblib==1.1.0
-sklearn==2.2.2
+sklearn==22.0.4
