@@ -281,17 +281,19 @@ if page_selected == "Home":
         st.plotly_chart(bar_chart5)
 
   st.write("You can upload your want to predict CSV file. We can use this app to help you predict. Or you can go to the web page 'predict' to predict if your income can get equal to or more than 50K. ")
-  uploaded_file = st.file_uploader("Choose a file")
-  for uploaded_file in not None:
-    df= pd.read_csv(uploaded_file)
+  upfile = st.file_uploader("Choose a file")
+  if upfile:
+    df = pd.read_csv(upfile)
     pipeline = joblib.load('pipeline.pkl')
     pf = pipeline.predict(df)
     df["income_>50K"]=pf
     st.write("This is your cvs file predict result.")
+    
     df_c = st.checkbox('Predict Result')
     if df_c:
         df
 
+        
     ages= df['age'].unique().tolist()
     education = df['educational-num'].unique().tolist()
     whours= df['hours-per-week'].unique().tolist()
