@@ -5,7 +5,8 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import sklearn
+import joblib
 
 
 ##################page_setting###########################
@@ -162,11 +163,12 @@ if page_selected == "Home":
   st.write('Now we use test1.csv to predict which factors affect the income can get equal to or more than 50K.')
   pda = st.checkbox('Predict Dataset')
   if pda:
+    
     st.write("You can see we use pipeline to predict the 'income_>50K' values")
     df = pd.read_csv('test1.csv')
-    pipeline = pickle.loads(open("pipeline.pkl",'r'))
+    pipeline = joblib.load('pipeline.pkl')
     pf = pipeline.predict(df)
-    df["income_>50K"]=pf
+    df["income_>50K"] = pf
 
     ages= df['age'].unique().tolist()
     education = df['educational-num'].unique().tolist()
@@ -283,15 +285,14 @@ if page_selected == "Home":
   st.write("You can upload your want to predict CSV file. We can use this app to help you predict. Or you can go to the web page 'predict' to predict if your income can get equal to or more than 50K. ")
   upfile = st.file_uploader("Choose a file")
   if upfile:
+    pipeline = joblib.load('pipeline.pkl')
     df = pd.read_csv(upfile)
-    pipeline = pickle.loads(open("pipeline.pkl",'r'))
     df["income_>50K"]=pf
     st.write("This is your cvs file predict result.")
     
     df_c = st.checkbox('Predict Result')
     if df_c:
         df
-
         
     ages= df['age'].unique().tolist()
     education = df['educational-num'].unique().tolist()
@@ -432,7 +433,7 @@ if page_selected =="Predict":
     Whours = st.text_input('Work hours per week:',whours)
     Country = st.text_input('Country:',country)
     df = pd.DataFrame([{'age':Age,'educational-num':Education,'gender':gender,'hours-per-week':Whours,'native-country':Country}])
-    pipeline = pickle.loads(open("pipeline.pkl",'r'))
+    pipeline = joblib.load('pipeline.pkl')
     predictions = pipeline.predict(df)
     #return predictions or outcomes
     prf=np.average(predictions)
