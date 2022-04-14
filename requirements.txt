@@ -1,7 +1,9 @@
-numpy==1.21.6
-pandas==1.3.5
-plotly.express==0.4.1
-seaborn == 0.11.2
-matplotlib==3.4.3
-joblib==1.1.0
-sklearn==0.0
+# Function dependencies, for example:
+# package>=
+numpy
+pandas
+plotly.express
+seaborn 
+matplotlib
+joblib
+sklearn
