@@ -1,14 +1,7 @@
-#from multiprocessing.dummy import Process
-#from sklearn import preprocessing
-from secrets import choice
-import joblib
 import streamlit as st
-#from ingest import data_file #, ingest_predicted_reviews,
 import pandas as pd
-#from datetime import datetime
 import numpy as np
 import plotly.express as px
-from PIL import Image
 import matplotlib.pyplot as plt
 import seaborn as sns
 import newmodel
@@ -290,6 +283,7 @@ if page_selected == "Home":
   st.write("You can upload your want to predict CSV file. We can use this app to help you predict. Or you can go to the web page 'predict' to predict if your income can get equal to or more than 50K. ")
   uploaded_file = st.file_uploader("Choose a file")
   if uploaded_file is not None:
+    import joblib
     df= pd.read_csv(uploaded_file)
     pipeline = joblib.load('pipeline.pkl')
     pf = pipeline.predict(df)
