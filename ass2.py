@@ -1,7 +1,7 @@
+import joblib
 import streamlit as st
 import pandas as pd
 import numpy as np
-import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
 import newmodel
@@ -69,7 +69,7 @@ if page_selected == "Home":
       df_grouped = df_grouped.rename(columns={'age':'count'})
       df_grouped = df_grouped.reset_index()
 
-    
+      import plotly.express as px
       bar_chart = px.bar(df_grouped,
                        x='income_>50K',
                        y='count',
