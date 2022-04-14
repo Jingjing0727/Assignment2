@@ -1,9 +1,8 @@
-# Function dependencies, for example:
-# package>=
-numpy
 pandas
-plotly.express
-seaborn 
+numpy
+streamlit
 matplotlib
-joblib
-sklearn
+altair
+plotly
+streamlit
+seaborn
