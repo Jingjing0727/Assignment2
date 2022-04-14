@@ -2,8 +2,9 @@ pandas
 numpy
 streamlit
 matplotlib
-altair
 plotly
 streamlit
 seaborn
 pip
+joblib==1.0.1
+
