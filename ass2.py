@@ -164,8 +164,7 @@ if page_selected == "Home":
   if pda:
     st.write("You can see we use pipeline to predict the 'income_>50K' values")
     df = pd.read_csv('test1.csv')
-    f=open("pipeline.pkl",'r')
-    pipeline = pickle.loads(f.read())
+    pipeline = pickle.loads(open("pipeline.pkl",'r'))
     pf = pipeline.predict(df)
     df["income_>50K"]=pf
 
@@ -285,8 +284,7 @@ if page_selected == "Home":
   upfile = st.file_uploader("Choose a file")
   if upfile:
     df = pd.read_csv(upfile)
-    f=open("pipeline.pkl",'rb')
-    pipeline = pickle.loads(f.read())
+    pipeline = pickle.loads(open("pipeline.pkl",'r'))
     df["income_>50K"]=pf
     st.write("This is your cvs file predict result.")
     
@@ -434,8 +432,7 @@ if page_selected =="Predict":
     Whours = st.text_input('Work hours per week:',whours)
     Country = st.text_input('Country:',country)
     df = pd.DataFrame([{'age':Age,'educational-num':Education,'gender':gender,'hours-per-week':Whours,'native-country':Country}])
-    f=open("pipeline.pkl",'rb')
-    pipeline = pickle.loads(f.read())
+    pipeline = pickle.loads(open("pipeline.pkl",'r'))
     predictions = pipeline.predict(df)
     #return predictions or outcomes
     prf=np.average(predictions)
