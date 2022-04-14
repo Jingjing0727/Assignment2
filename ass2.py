@@ -165,7 +165,6 @@ if page_selected == "Home":
     pipeline = joblib.load('pipeline.pkl')
     pf = pipeline.predict(df)
     df["income_>50K"]=pf
-    st.write("")
 
     ages= df['age'].unique().tolist()
     education = df['educational-num'].unique().tolist()
@@ -281,8 +280,8 @@ if page_selected == "Home":
         st.plotly_chart(bar_chart5)
 
   st.write("You can upload your want to predict CSV file. We can use this app to help you predict. Or you can go to the web page 'predict' to predict if your income can get equal to or more than 50K. ")
-  uploaded_file = st.file_uploader("Choose a file")
-  if uploaded_file is not None:
+  uploaded_files = st.file_uploader("Choose a file")
+  for uploaded_file in uploaded_files:
     import joblib
     df= pd.read_csv(uploaded_file)
     pipeline = joblib.load('pipeline.pkl')
