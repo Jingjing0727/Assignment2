@@ -164,7 +164,7 @@ if page_selected == "Home":
   if pda:
     st.write("You can see we use pipeline to predict the 'income_>50K' values")
     df = pd.read_csv('test1.csv')
-    f=open("pipeline.pk",'r')
+    f=open("pipeline.pkl",'r')
     pipeline = pickle.loads(f.read())
     pf = pipeline.predict(df)
     df["income_>50K"]=pf
@@ -285,7 +285,7 @@ if page_selected == "Home":
   upfile = st.file_uploader("Choose a file")
   if upfile:
     df = pd.read_csv(upfile)
-    f=open("pipeline.pk",'r')
+    f=open("pipeline.pkl",'r')
     pipeline = pickle.loads(f.read())
     df["income_>50K"]=pf
     st.write("This is your cvs file predict result.")
