@@ -1,4 +1,4 @@
-numpy==1.15.0
+numpy==1.21
 streamlit==0.52.2
 pandas==0.23.4
 sklearn == 22.0.4
