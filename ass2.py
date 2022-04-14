@@ -285,7 +285,7 @@ if page_selected == "Home":
   upfile = st.file_uploader("Choose a file")
   if upfile:
     df = pd.read_csv(upfile)
-    f=open("pipeline.pkl",'r')
+    f=open("pipeline.pkl",'rb')
     pipeline = pickle.loads(f.read())
     df["income_>50K"]=pf
     st.write("This is your cvs file predict result.")
@@ -381,7 +381,6 @@ if page_selected == "Home":
        df_grouped4 = df_grouped4.rename(columns={'native-country':'count'})
        df_grouped4 = df_grouped4.reset_index()
        st.write('You selected:', country_selection)
-       st.write('')
        bar_chart4 = px.bar(df_grouped4,
                        x='income_>50K',
                        y='count',
@@ -435,7 +434,8 @@ if page_selected =="Predict":
     Whours = st.text_input('Work hours per week:',whours)
     Country = st.text_input('Country:',country)
     df = pd.DataFrame([{'age':Age,'educational-num':Education,'gender':gender,'hours-per-week':Whours,'native-country':Country}])
-    pipeline = joblib.load('pipeline.pkl')
+    f=open("pipeline.pkl",'rb')
+    pipeline = pickle.loads(f.read())
     predictions = pipeline.predict(df)
     #return predictions or outcomes
     prf=np.average(predictions)
@@ -461,7 +461,7 @@ if page_selected == "Model":
        df_g1 =df.groupby(by=['gender']).count()[['income_>50K']]
        df_g1 = df_g1.rename(columns={'income_>50K':'count'})
        df_g1 = df_g1.reset_index()
-       st.write('')
+       
        bar_1 = px.bar(df_g1,
                    x ='gender',
                    y ='count',
