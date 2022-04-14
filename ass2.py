@@ -1,4 +1,4 @@
-from sklearn.externals import joblib
+import pickle
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -164,7 +164,8 @@ if page_selected == "Home":
   if pda:
     st.write("You can see we use pipeline to predict the 'income_>50K' values")
     df = pd.read_csv('test1.csv')
-    pipeline = joblib.load('pipeline.pkl')
+    f=open("pipeline.pk",'r')
+    pipeline = pickle.loads(f.read())
     pf = pipeline.predict(df)
     df["income_>50K"]=pf
 
@@ -175,7 +176,6 @@ if page_selected == "Home":
     country = df['native-country'].unique().tolist()
     income =df['income_>50K'].unique().tolist()
 
-    st.write('')
     Choice = st.selectbox(
      'The impact of different conditions on income.',
      ('Age','Educational_Level','Work_hours_per_work','Country','Gender'))
@@ -285,8 +285,8 @@ if page_selected == "Home":
   upfile = st.file_uploader("Choose a file")
   if upfile:
     df = pd.read_csv(upfile)
-    pipeline = joblib.load('pipeline.pkl')
-    pf = pipeline.predict(df)
+    f=open("pipeline.pk",'r')
+    pipeline = pickle.loads(f.read())
     df["income_>50K"]=pf
     st.write("This is your cvs file predict result.")
     
