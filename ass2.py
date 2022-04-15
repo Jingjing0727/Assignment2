@@ -285,6 +285,7 @@ if page_selected == "Home":
   if upfile:
     pipeline = joblib.load('pipeline.pkl')
     df = pd.read_csv(upfile)
+    pf = pipeline.predict(df)
     df["income_>50K"]=pf
     st.write("This is your cvs file predict result.")
     
