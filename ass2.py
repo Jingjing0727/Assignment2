@@ -393,7 +393,9 @@ if page_selected == "Home":
    Country =st.text_input('Country Number:',)
    a = df[df['native-country']==Country].index.tolist()
    a1 = df.natnum.loc[a]
-   st.write('Number:', a1)
+   b=df['num1'].loc[a]
+   st.write('Number:', b)
+   
 
    Education = st.text_input('Educational Level:',)
    b = df[df['educational-num']==Education].index.tolist()
