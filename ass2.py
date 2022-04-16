@@ -151,20 +151,21 @@ if page_selected == "Home":
       st.plotly_chart(bar_chart5)
    st.write('We use this module to find which factors affect the income to 50k.')
    st.write('Now we use test1.csv to predict which factors affect the income can get equal to or more than 50K.')
+  
    pda = st.checkbox('Predict Dataset')
    if pda:
       st.write("You can see we use pipeline to predict the 'income_>50K' values")
-      df = pd.read_csv('test1.csv')
+      df1 = pd.read_csv('test1.csv')
       pipeline = joblib.load('pipeline.pkl')
-      pf = pipeline.predict(df)
-      df["income_>50K"] = pf
+      pf = pipeline.predict(df1)
+      df1["income_>50K"] = pf
 
-      ages= df['age'].unique().tolist()
-      education = df['educational-num'].unique().tolist()
-      whours= df['hours-per-week'].unique().tolist()
-      sex= df['gender'].unique().tolist()
-      country = df['native-country'].unique().tolist()
-      income =df['income_>50K'].unique().tolist()
+      ages= df1['age'].unique().tolist()
+      education = df1['educational-num'].unique().tolist()
+      whours= df1['hours-per-week'].unique().tolist()
+      sex= df1['gender'].unique().tolist()
+      country = df1['native-country'].unique().tolist()
+      income =df1['income_>50K'].unique().tolist()
 
       st.title("The effect of different age ranges on income.")
       age_selection = st.slider('Age:',
