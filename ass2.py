@@ -421,49 +421,46 @@ if page_selected =="Predict":
 if page_selected == "Model":
   st.write("This is my original data. You can see native_country has many different names in train.csv. 'Show train dataframe has a training dataset and some bar chart. You can use it to know this data factors type.  ")
 
-  if st.checkbox('Show train dataframe'):
-    st.write('This dataset data is clean.Now this dataset not missing value.')
-    df =pd.read_csv('train1new.csv')
-    df
-    st.write('We can see this dataset values most is a categorical value. Country and gender values need we transform into the number. Then we need to check which different factors make that affect income. We can use these charts to find some results.')
+  st.write('This dataset data is clean.Now this dataset not missing value.')
+  df =pd.read_csv('train1new.csv')
+  df
+  st.write('We can see this dataset values most is a categorical value. Country and gender values need we transform into the number. Then we need to check which different factors make that affect income. We can use these charts to find some results.')
     
-    if st.checkbox('Gender'):
-       df = pd.read_csv('train1new.csv')
-       df_g1 =df.groupby(by=['gender']).count()[['income_>50K']]
-       df_g1 = df_g1.rename(columns={'income_>50K':'count'})
-       df_g1 = df_g1.reset_index()
+  df = pd.read_csv('train1new.csv')
+  df_g1 =df.groupby(by=['gender']).count()[['income_>50K']]
+  df_g1 = df_g1.rename(columns={'income_>50K':'count'})
+  df_g1 = df_g1.reset_index()
        
-       bar_1 = px.bar(df_g1,
+  bar_1 = px.bar(df_g1,
                    x ='gender',
                    y ='count',
                    color='gender',
                    template='plotly_white')
-       st.plotly_chart(bar_1)
+  st.plotly_chart(bar_1)
     
-    if st.checkbox('Age'):
-        df = pd.read_csv('train1new.csv')
-        df_g2 =df.groupby(by=['age']).count()[['income_>50K']]
-        df_g2 = df_g2.rename(columns={'income_>50K':'count'}) 
-        df_g2 = df_g2.reset_index()
-        bar_2 = px.bar(df_g2,
+  df = pd.read_csv('train1new.csv')
+  df_g2 =df.groupby(by=['age']).count()[['income_>50K']]
+  df_g2 = df_g2.rename(columns={'income_>50K':'count'}) 
+  df_g2 = df_g2.reset_index()
+  bar_2 = px.bar(df_g2,
                    x ='age',
                    y ='count',
                    color='age',
                    template='plotly_white')
-        st.plotly_chart(bar_2)
+  st.plotly_chart(bar_2)
     
-    if st.checkbox('Educational Level'):
-        df = pd.read_csv('train1new.csv')
-        df_g3 =df.groupby(by=['educational-num']).count()[['income_>50K']]
-        df_g3 = df_g3.rename(columns={'income_>50K':'count'}) 
-        df_g3 = df_g3.reset_index()
-        bar_3 = px.bar(df_g3,
+
+  df = pd.read_csv('train1new.csv')
+  df_g3 =df.groupby(by=['educational-num']).count()[['income_>50K']]
+  df_g3 = df_g3.rename(columns={'income_>50K':'count'}) 
+  df_g3 = df_g3.reset_index()
+  bar_3 = px.bar(df_g3,
                    x ='educational-num',
                    y ='count',
                    text = 'count',
                    color='educational-num',
                    template='plotly_white')
-        st.plotly_chart(bar_3)
+  st.plotly_chart(bar_3)
   st.write('Then we can which different factors affect income. First We see that factors have how many unique values in this dataset.')
   df =pd.read_csv('train1new.csv')
   table_df=df.nunique()
@@ -477,7 +474,7 @@ if page_selected == "Model":
   sns.heatmap(df_corr.corr(),cmap="viridis",annot=True,linewidth=0.5)
   st.pyplot(fig)
   st.write("From the above results, we know that most of the data are categorical data in this dataset. ")
-  st.write("When I build models, I choose algorithms that are basically classification-based. For example: RandomForestClassifier, DecisionTreeClassifier, KNeighborsClassifier. Because of the 'age', I added an additional LogisticRegression. Among the four, RandomForestClassifier has the highest prediction. In the end, I chose RandomForestClassifier to build the model and pipeline.")
+  st.write("When I build models, I choose algorithms that are basically classification-based. For example: RandomForestClassifier, DecisionTreeClassifier, KNeighborsClassifier. Because of the 'age', I added an additional LogisticRegression. Among the four, RandomForestClassifier has the best prediction. In the end, I chose RandomForestClassifier to build the model and pipeline.")
   
   if st.button('model code'):
     code ='''
