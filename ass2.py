@@ -416,21 +416,15 @@ if page_selected == "Home":
 if page_selected =="Predict":
     st.write('Country and Educational levels have corresponding numbers. This is the corresponding numbers table.') 
     data = st.checkbox('Corresponding Numbers table')
-    df_n = pd.read_csv('transfer_data.csv')
-    df_n
+    if data:
+     df_n = pd.read_csv('transfer_data.csv')
+     df_n
 
-    df=pd.read_csv('train1.csv')
-    ages= df['age'].unique().tolist()
-    education = df['educational-num'].unique().tolist()
-    whours= df['hours-per-week'].unique().tolist()
-    sex= df['gender'].unique().tolist()
-    country = df['native-country'].unique().tolist()
-    income =df['income_>50K'].unique().tolist()
-    Age=st.text_input('Age:',ages)
-    Education = st.text_input('Educational Level:',education)
-    gender = st.text_input('Gender:',sex)
-    Whours = st.text_input('Work hours per week:',whours)
-    Country = st.text_input('Country:',country)
+    Age=st.text_input('Age:',)
+    Education = st.text_input('Educational Level:',)
+    gender = st.text_input('Gender:',)
+    Whours = st.text_input('Work hours per week:',)
+    Country = st.text_input('Country:',)
     df = pd.DataFrame([{'age':Age,'educational-num':Education,'gender':gender,'hours-per-week':Whours,'native-country':Country}])
     pipeline = joblib.load('pipeline.pkl')
     predictions = pipeline.predict(df)
@@ -441,6 +435,7 @@ if page_selected =="Predict":
         st.balloons()
     else:
         st.info('You can not get income_> 50K.')
+        st.snow()
     
 
 ##############################Model####################################
