@@ -43,7 +43,7 @@ if page_selected == "Home":
    st.write("You can free choose the factors' range or values. Then you can see you choose factors how to affect income. ")
     
     #######age to income >50K###################################
-   option = st.selectbox("You can see the Training Dataset and Predict Dataset Analysis. ",("Training Dataset","Predict Dataset"))
+   option = st.selectbox("You can choose the Training Dataset and Predict Dataset Analysis. ",("Training Dataset","Predict Dataset"))
    if option =='Training Dataset':
        
       df = pd.read_csv('train1new.csv')
@@ -153,17 +153,17 @@ if page_selected == "Home":
    st.write('Now we use test1.csv to predict which factors affect the income can get equal to or more than 50K.')
    if option =='Predict Dataset':
       st.write("You can see we use pipeline to predict the 'income_>50K' values")
-      df1 = pd.read_csv('test1.csv')
+      df = pd.read_csv('test1.csv')
       pipeline = joblib.load('pipeline.pkl')
-      pf = pipeline.predict(df1)
-      df1["income_>50K"] = pf
+      pf = pipeline.predict(df)
+      df["income_>50K"] = pf
 
-      ages= df1['age'].unique().tolist()
-      education = df1['educational-num'].unique().tolist()
-      whours= df1['hours-per-week'].unique().tolist()
-      sex= df1['gender'].unique().tolist()
-      country = df1['native-country'].unique().tolist()
-      income =df1['income_>50K'].unique().tolist()
+      ages= df['age'].unique().tolist()
+      education = df['educational-num'].unique().tolist()
+      whours= df['hours-per-week'].unique().tolist()
+      sex= df['gender'].unique().tolist()
+      country = df['native-country'].unique().tolist()
+      income =df['income_>50K'].unique().tolist()
 
       st.title("The effect of different age ranges on income.")
       age_selection = st.slider('Age:',
