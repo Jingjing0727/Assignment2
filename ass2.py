@@ -522,14 +522,15 @@ if page_selected =="Predict":
        st.write('Number:1')  
 
      st.write("If don't show the Number, it is not in the data. Or you can see the Corresponding Numbers table.")
-     Age=st.text_input('Age:',)
-     Education = st.text_input('Educational Level:',)
-     gender = st.text_input('Gender:',)
-     Whours = st.text_input('Work hours per week:',)
-     Country = st.text_input('Country:',)
-     df = pd.DataFrame([{'age':Age,'educational-num':Education,'gender':gender,'hours-per-week':Whours,'native-country':Country}])
+    
+     Age1=st.text_input('Age:',)
+     Education1 = st.text_input('Educational Level:',)
+     gender1 = st.text_input('Gender:',)
+     Whours1 = st.text_input('Work hours per week:',)
+     Country1 = st.text_input('Country:',)
+     df1 = pd.DataFrame([{'age':Age1,'educational-num':Education1,'gender':gender1,'hours-per-week':Whours1,'native-country':Country1}])
      pipeline = joblib.load('pipeline.pkl')
-     predictions = pipeline.predict(df)
+     predictions = pipeline.predict(df1)
     #return predictions or outcomes
      prf=np.average(predictions)
      if prf == 1:
