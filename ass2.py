@@ -471,8 +471,7 @@ if page_selected == "Home":
        st.write('Number:40')
    elif(Country == 'Yugoslavia'):
        st.write('Number:41')
-   else:
-       st.write("If don't show the Number, it is not in the data.")
+
 
    Education = st.text_input('Educational Level:',)
    if(Education=='Preschool'):
@@ -501,14 +500,18 @@ if page_selected == "Home":
        st.write('Number:12')
    if(Education=='Bachelors'):
        st.write('Number:13')
-
-
-
+   if(Education=='Masters'):
+       st.write('Number:14')
+   if(Education=='Prof-school'):
+       st.write('Number:15')
+   if(Education=='Doctorate'):
+       st.write('Number:16')
 
    gender = st.text_input('Gender:',)
-   c = df[df['gender']==gender].index.tolist()
-   c1= df.num3.loc[c]
-   st.write('Number:', c1)
+   if(Education=='Female'):
+       st.write('Number:0')
+   elif(Education=='Male'):
+       st.write('Number:1')  
    st.write("If don't show the Number, it is not in the data.")
 
 ##############################Predict##################################
