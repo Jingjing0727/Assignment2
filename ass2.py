@@ -392,7 +392,7 @@ if page_selected == "Home":
 
 ##############################Predict##################################
 if page_selected =="Predict":
-    st.write('Country and Educational levels have corresponding numbers.') 
+    st.write(' Educational levels ,Gender and Country have corresponding numbers.') 
     
    
     Age1 = st.text_input('Age:',)
