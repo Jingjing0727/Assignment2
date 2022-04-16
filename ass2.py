@@ -538,7 +538,7 @@ if page_selected =="Predict":
     if prf == 1:
         st.info('You can get income_> 50K!!!')
         st.balloons()
-    else:
+    elif prf==0:
         st.info('You can not get income_> 50K.')
         st.snow()
     
