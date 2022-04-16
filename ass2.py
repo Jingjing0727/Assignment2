@@ -498,9 +498,9 @@ if page_selected == "Home":
        st.write('Number:11')
    if(Education=='Assoc-acdm'):
        st.write('Number:12')
-   if(Education=='Bachelors'):
+   if(Education=='Bachelor'):
        st.write('Number:13')
-   if(Education=='Masters'):
+   if(Education=='Master'):
        st.write('Number:14')
    if(Education=='Prof-school'):
        st.write('Number:15')
