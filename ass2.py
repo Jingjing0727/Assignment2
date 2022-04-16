@@ -388,18 +388,22 @@ if page_selected == "Home":
    if data:
        df_n = pd.read_csv('transfer_data.csv')
        df_n
+       
    df = pd.read_csv('transfer_data.csv')
    Country =st.text_input('Country Number:',)
    a = df[df['native-country']==Country].index.tolist()
-   st.write('Number:', df['num1'].loc[a])
+   a1 = df['num1'].loc[a]
+   st.write('Number:', a1)
 
    Education = st.text_input('Educational Level:',)
    b = df[df['educational-num']==Education].index.tolist()
-   st.write('Number:', df['num2'].loc[b])
+   b1 =df['num2'].loc[b]
+   st.write('Number:', b1)
 
    gender = st.text_input('Gender:',)
    c = df[df['gender']==gender].index.tolist()
-   st.write('Number:', df['num3'].loc[c])
+   c1= df['num3'].loc[c]
+   st.write('Number:', c1)
    st.write("If don't show the Number, it is not in the data.")
 
 ##############################Predict##################################
