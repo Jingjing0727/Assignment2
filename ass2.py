@@ -39,13 +39,13 @@ page_selected = st.sidebar.radio("Menu", ["Home", "Predict","Model"])
 if page_selected == "Home":  
    st.write('This training dataset and testing data come from the public dataset. We want to know if we want to get income equal to or more than 50k, we have to meet what conditions.')
    st.write('We use the original dataset to train.')
+   st.write("You see the Training dataset factors how affect income.")
    st.write("You can free choose the factors' range or values. Then you can see you choose factors how to affect income. ")
     
     #######age to income >50K###################################
-   oda = st.checkbox('Training Dataset')
-   if oda:
-      st.write("You see the Training dataset factors how affect income.")
-
+   option = st.selectbox("You can see the Training Dataset and Predict Dataset Analysis. ",("Training Dataset","Predict Dataset"))
+   if option =='Training Dataset':
+       
       df = pd.read_csv('train1new.csv')
       ages1= df['age'].unique().tolist()
       education1 = df['educational-num'].unique().tolist()
@@ -151,9 +151,7 @@ if page_selected == "Home":
       st.plotly_chart(bar_chart5)
    st.write('We use this module to find which factors affect the income to 50k.')
    st.write('Now we use test1.csv to predict which factors affect the income can get equal to or more than 50K.')
-  
-   pda = st.checkbox('Predict Dataset')
-   if pda:
+   if option =='Predict Dataset':
       st.write("You can see we use pipeline to predict the 'income_>50K' values")
       df1 = pd.read_csv('test1.csv')
       pipeline = joblib.load('pipeline.pkl')
