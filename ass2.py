@@ -47,102 +47,102 @@ if page_selected == "Home":
       st.write("You see the Training dataset factors how affect income.")
 
       df = pd.read_csv('train1new.csv')
-      ages= df['age'].unique().tolist()
-      education = df['educational-num'].unique().tolist()
-      whours= df['hours-per-week'].unique().tolist()
-      sex= df['gender'].unique().tolist()
-      country = df['native-country'].unique().tolist()
-      income =df['income_>50K'].unique().tolist()
+      ages1= df['age'].unique().tolist()
+      education1 = df['educational-num'].unique().tolist()
+      whours1= df['hours-per-week'].unique().tolist()
+      sex1= df['gender'].unique().tolist()
+      country1 = df['native-country'].unique().tolist()
+      income1 =df['income_>50K'].unique().tolist()
 
       st.title("The effect of different age ranges on income.")
-      age_selection = st.slider('Age:',
-                              min_value =min(ages),
-                              max_value = max(ages),
-                              value = (min(ages),max(ages)))
-      st.write('You selected:', age_selection)
+      age_selection1 = st.slider('Age:',
+                              min_value =min(ages1),
+                              max_value = max(ages1),
+                              value = (min(ages1),max(ages1)))
+      st.write('You selected:', age_selection1)
 
-      mask =(df['age'].between(*age_selection))
-      df_grouped =df[mask].groupby(by=['income_>50K']).count()[['age']]
-      df_grouped = df_grouped.rename(columns={'age':'count'})
-      df_grouped = df_grouped.reset_index()
+      mask1 =(df['age'].between(*age_selection1))
+      df_grouped1 =df[mask1].groupby(by=['income_>50K']).count()[['age']]
+      df_grouped1 = df_grouped1.rename(columns={'age':'count'})
+      df_grouped1 = df_grouped1.reset_index()
 
     
-      bar_chart = px.bar(df_grouped,
+      bar_chart1 = px.bar(df_grouped1,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='income_>50K',
                        template='plotly_white')
-      st.plotly_chart(bar_chart)
+      st.plotly_chart(bar_chart1)
 
 #####education #######################
 
       st.title("The effect of different Educational Level ranges on income.")
-      edulevel_selection = st.slider('Educational Level:',
-                                   min_value = min(education),
-                                   max_value = max(education),
-                                   value = (min(education),max(education)))
-      st.write('You selected:', edulevel_selection)
+      edulevel_selection1 = st.slider('Educational Level:',
+                                   min_value = min(education1),
+                                   max_value = max(education1),
+                                   value = (min(education1),max(education1)))
+      st.write('You selected:', edulevel_selection1)
 
-      mask2 =(df['educational-num'].between(*edulevel_selection))
-      df_grouped2 = df[mask2].groupby(by=['income_>50K']).count()[['educational-num']]
-      df_grouped2 = df_grouped2.rename(columns={'educational-num':'count'})
-      df_grouped2 = df_grouped2.reset_index()
+      mask12 =(df['educational-num'].between(*edulevel_selection1))
+      df_grouped12 = df[mask12].groupby(by=['income_>50K']).count()[['educational-num']]
+      df_grouped12 = df_grouped12.rename(columns={'educational-num':'count'})
+      df_grouped12 = df_grouped12.reset_index()
       
       st.write('You can free choose the Educational level range. Then you can see want this different educational level range effect income.')
-      bar_chart2 = px.bar(df_grouped2,
+      bar_chart12 = px.bar(df_grouped12,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='income_>50K',
                        template='plotly_white')
-      st.plotly_chart(bar_chart2)
+      st.plotly_chart(bar_chart12)
 
 ########Work hours per week####################################################
       st.title("The effect of Work hours per week on income.")
-      whours_selection = st.slider('Work hours per week:',
-                                 min_value = min(whours),
-                                 max_value = max(whours),
-                                 value = (min(whours),max(whours)))
-      st.write('You selected:', whours_selection)
-      mask3 =(df['hours-per-week'].between(*whours_selection))
-      df_grouped3=df[mask3].groupby(by=['income_>50K']).count()[['hours-per-week']]
-      df_grouped3 = df_grouped3.rename(columns={'hours-per-week':'count'})
-      df_grouped3 = df_grouped3.reset_index()
+      whours_selection1 = st.slider('Work hours per week:',
+                                 min_value = min(whours1),
+                                 max_value = max(whours1),
+                                 value = (min(whours1),max(whours1)))
+      st.write('You selected:', whours_selection1)
+      mask13 =(df['hours-per-week'].between(*whours_selection1))
+      df_grouped13=df[mask13].groupby(by=['income_>50K']).count()[['hours-per-week']]
+      df_grouped13 = df_grouped13.rename(columns={'hours-per-week':'count'})
+      df_grouped13 = df_grouped13.reset_index()
 
-      bar_chart3 = px.bar(df_grouped3,
+      bar_chart13 = px.bar(df_grouped13,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='income_>50K',
                        template='plotly_white')
-      st.plotly_chart(bar_chart3)
+      st.plotly_chart(bar_chart13)
 ##########Native Country###############################################
     
       st.title("The effect of differen countries on income.")
-      country_selection = st.selectbox('Native Country:',
-                                       country)
-      mask4 = df[(df['native-country']==country_selection)]
-      df_grouped4=mask4.groupby(by=['income_>50K']).count()[['native-country']]
-      df_grouped4 = df_grouped4.rename(columns={'native-country':'count'})
-      df_grouped4 = df_grouped4.reset_index()
-      st.write('You selected:', country_selection)
-      bar_chart4 = px.bar(df_grouped4,
+      country_selection1 = st.selectbox('Native Country:',
+                                       country1)
+      mask14 = df[(df['native-country']==country_selection1)]
+      df_grouped14=mask14.groupby(by=['income_>50K']).count()[['native-country']]
+      df_grouped14 = df_grouped14.rename(columns={'native-country':'count'})
+      df_grouped14 = df_grouped14.reset_index()
+      st.write('You selected:', country_selection1)
+      bar_chart14 = px.bar(df_grouped14,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='count',
                        template='plotly_white')
-      st.plotly_chart(bar_chart4)
+      st.plotly_chart(bar_chart14)
 ############Gender#################################################################
       st.title('The effect of Gender on income.')
-      sex_selection = st.selectbox('Gender:',sex)
-      mask5 = df[(df['gender']==sex_selection )]
-      df_grouped5=mask5.groupby(by=['income_>50K']).count()[['gender']]
-      df_grouped5 = df_grouped5.rename(columns={'gender':'count'})
-      df_grouped5 = df_grouped5.reset_index()
-      st.write('You selected:', sex_selection)
-      bar_chart5 = px.bar(df_grouped5,
+      sex_selection1 = st.selectbox('Gender:',sex1)
+      mask15 = df[(df['gender']==sex_selection1 )]
+      df_grouped15=mask15.groupby(by=['income_>50K']).count()[['gender']]
+      df_grouped15 = df_grouped15.rename(columns={'gender':'count'})
+      df_grouped15 = df_grouped15.reset_index()
+      st.write('You selected:', sex_selection1)
+      bar_chart5 = px.bar(df_grouped15,
                        x='income_>50K',
                        y='count',
                        text='count',
@@ -389,131 +389,7 @@ if page_selected == "Home":
        df_n = pd.read_csv('transfer_data.csv')
        df_n
        
-   df = pd.read_csv('transfer_data.csv')
-   Country =st.text_input('Country Number:',)
-   if (Country == 'Cambodia'):
-       st.write('Number:1')
-   elif(Country == 'Canada'):
-       st.write('Number:2')
-   elif(Country == 'China'):
-       st.write('Number:3')
-   elif(Country == 'Columbia'):
-       st.write('Number:4')
-   elif(Country == 'Cuba'):
-       st.write('Number:5')
-   elif(Country == 'Dominican-Republic'):
-       st.write('Number:6')
-   elif(Country == 'Ecuador'):
-       st.write('Number:7')
-   elif(Country == 'El-Salvador'):
-       st.write('Number:8')
-   elif(Country == 'England'):
-       st.write('Number:9')
-   elif(Country == 'France'):
-       st.write('Number:10')
-   elif(Country == 'Greece'):
-       st.write('Number:12')  
-   elif(Country == 'Guatemala'):
-       st.write('Number:13') 
-   elif(Country == 'Haiti'):
-       st.write('Number:14')        
-   elif(Country == 'Holand-Netherlands'):
-       st.write('Number:15') 
-   elif(Country == 'Honduras'):
-       st.write('Number:16') 
-   elif(Country == 'Hong'):
-       st.write('Number:17') 
-   elif(Country == 'Hungary'):
-       st.write('Number:18') 
-   elif(Country == 'India'):
-       st.write('Number:19') 
-   elif(Country == 'Iran'):
-       st.write('Number:20') 
-   elif(Country == 'Ireland'):
-       st.write('Number:21') 
-   elif(Country == 'Italy'):
-       st.write('Number:22') 
-   elif(Country == 'Jamaica'):
-       st.write('Number:23') 
-   elif(Country == 'Japan'):
-       st.write('Number:24') 
-   elif(Country == 'Laos'):
-       st.write('Number:25') 
-   elif(Country == 'Mexico'):
-       st.write('Number:26') 
-   elif(Country == 'Nicaragua'):
-       st.write('Number:27') 
-   elif(Country == 'Outlying-US'):
-       st.write('Number:28') 
-   elif(Country == 'Peru'):
-       st.write('Number:29') 
-   elif(Country == 'Philippines'):
-       st.write('Number:30') 
-   elif(Country == 'Poland'):
-       st.write('Number:31') 
-   elif(Country == 'Portugal'):
-       st.write('Number:32') 
-   elif(Country == 'Puerto-Rico'):
-       st.write('Number:33') 
-   elif(Country == 'Scotland'):
-       st.write('Number:34') 
-   elif(Country == 'South'):
-       st.write('Number:35')
-   elif(Country == 'Taiwan'):
-       st.write('Number:36')        
-   elif(Country == 'Thailand'):
-       st.write('Number:37')
-   elif(Country == 'Trinadad&Tobago'):
-       st.write('Number:38')
-   elif(Country == 'United-States'):
-       st.write('Number:39')       
-   elif(Country == 'Vietnam'):
-       st.write('Number:40')
-   elif(Country == 'Yugoslavia'):
-       st.write('Number:41')
 
-
-   Education = st.text_input('Educational Level:',)
-   if(Education=='Preschool'):
-       st.write('Number:1')
-   elif(Education=='1st-4th'):
-       st.write('Number:2')
-   elif(Education=='5th-6th'):
-       st.write('Number:3')
-   elif(Education=='7th-8th'):
-       st.write('Number:4')
-   elif(Education=='9th'):
-       st.write('Number:5')
-   elif(Education=='10th'):
-       st.write('Number:6')
-   if(Education=='11th'):
-       st.write('Number:7')
-   if(Education=='12th'):
-       st.write('Number:8')
-   if(Education=='HS-grad'):
-       st.write('Number:9')
-   if(Education=='Some-college'):
-       st.write('Number:10')
-   if(Education=='Assoc-voc'):
-       st.write('Number:11')
-   if(Education=='Assoc-acdm'):
-       st.write('Number:12')
-   if(Education=='Bachelor'):
-       st.write('Number:13')
-   if(Education=='Master'):
-       st.write('Number:14')
-   if(Education=='Prof-school'):
-       st.write('Number:15')
-   if(Education=='Doctorate'):
-       st.write('Number:16')
-
-   gender = st.text_input('Gender:',)
-   if(gender=='Female'):
-       st.write('Number:0')
-   elif(gender=='Male'):
-       st.write('Number:1')  
-
-   st.write("If don't show the Number, it is not in the data. Or you can see the Corresponding Numbers table.")
 
 ##############################Predict##################################
 if page_selected =="Predict":
@@ -522,7 +398,131 @@ if page_selected =="Predict":
      if data:
        df_n = pd.read_csv('transfer_data.csv')
        df_n
+     df = pd.read_csv('transfer_data.csv')
+     Country =st.text_input('Country Number:',)
+     if (Country == 'Cambodia'):
+       st.write('Number:1')
+     elif(Country == 'Canada'):
+       st.write('Number:2')
+     elif(Country == 'China'):
+       st.write('Number:3')
+     elif(Country == 'Columbia'):
+       st.write('Number:4')
+     elif(Country == 'Cuba'):
+       st.write('Number:5')
+     elif(Country == 'Dominican-Republic'):
+       st.write('Number:6')
+     elif(Country == 'Ecuador'):
+       st.write('Number:7')
+     elif(Country == 'El-Salvador'):
+       st.write('Number:8')
+     elif(Country == 'England'):
+       st.write('Number:9')
+     elif(Country == 'France'):
+        st.write('Number:10')
+     elif(Country == 'Greece'):
+       st.write('Number:12')  
+     elif(Country == 'Guatemala'):
+       st.write('Number:13') 
+     elif(Country == 'Haiti'):
+       st.write('Number:14')        
+     elif(Country == 'Holand-Netherlands'):
+       st.write('Number:15') 
+     elif(Country == 'Honduras'):
+       st.write('Number:16') 
+     elif(Country == 'Hong'):
+       st.write('Number:17') 
+     elif(Country == 'Hungary'):
+       st.write('Number:18') 
+     elif(Country == 'India'):
+       st.write('Number:19') 
+     elif(Country == 'Iran'):
+       st.write('Number:20') 
+     elif(Country == 'Ireland'):
+       st.write('Number:21') 
+     elif(Country == 'Italy'):
+       st.write('Number:22') 
+     elif(Country == 'Jamaica'):
+       st.write('Number:23') 
+     elif(Country == 'Japan'):
+       st.write('Number:24') 
+     elif(Country == 'Laos'):
+       st.write('Number:25') 
+     elif(Country == 'Mexico'):
+       st.write('Number:26') 
+     elif(Country == 'Nicaragua'):
+       st.write('Number:27') 
+     elif(Country == 'Outlying-US'):
+       st.write('Number:28') 
+     elif(Country == 'Peru'):
+       st.write('Number:29') 
+     elif(Country == 'Philippines'):
+       st.write('Number:30') 
+     elif(Country == 'Poland'):
+       st.write('Number:31') 
+     elif(Country == 'Portugal'):
+       st.write('Number:32') 
+     elif(Country == 'Puerto-Rico'):
+       st.write('Number:33') 
+     elif(Country == 'Scotland'):
+       st.write('Number:34') 
+     elif(Country == 'South'):
+       st.write('Number:35')
+     elif(Country == 'Taiwan'):
+       st.write('Number:36')        
+     elif(Country == 'Thailand'):
+       st.write('Number:37')
+     elif(Country == 'Trinadad&Tobago'):
+       st.write('Number:38')
+     elif(Country == 'United-States'):
+       st.write('Number:39')       
+     elif(Country == 'Vietnam'):
+       st.write('Number:40')
+     elif(Country == 'Yugoslavia'):
+       st.write('Number:41')
 
+
+     Education = st.text_input('Educational Level:',)
+     if(Education=='Preschool'):
+       st.write('Number:1')
+     elif(Education=='1st-4th'):
+       st.write('Number:2')
+     elif(Education=='5th-6th'):
+       st.write('Number:3')
+     elif(Education=='7th-8th'):
+       st.write('Number:4')
+     elif(Education=='9th'):
+       st.write('Number:5')
+     elif(Education=='10th'):
+       st.write('Number:6')
+     elif(Education=='11th'):
+       st.write('Number:7')
+     elif(Education=='12th'):
+       st.write('Number:8')
+     elif(Education=='HS-grad'):
+       st.write('Number:9')
+     elif(Education=='Some-college'):
+       st.write('Number:10')
+     elif(Education=='Assoc-voc'):
+       st.write('Number:11')
+     elif(Education=='Assoc-acdm'):
+       st.write('Number:12')
+     elif(Education=='Bachelor'):
+       st.write('Number:13')
+     elif(Education=='Master'):
+       st.write('Number:14')
+     elif(Education=='Prof-school'):
+       st.write('Number:15')
+     elif(Education=='Doctorate'):
+       st.write('Number:16')
+
+     gender = st.text_input('Gender:',)
+     if(gender=='Female'):
+       st.write('Number:0')
+     elif(gender=='Male'):
+       st.write('Number:1')  
+
+     st.write("If don't show the Number, it is not in the data. Or you can see the Corresponding Numbers table.")
      Age=st.text_input('Age:',)
      Education = st.text_input('Educational Level:',)
      gender = st.text_input('Gender:',)
