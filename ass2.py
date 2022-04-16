@@ -508,10 +508,11 @@ if page_selected == "Home":
        st.write('Number:16')
 
    gender = st.text_input('Gender:',)
-   if(Education=='Female'):
+   if(gender=='Female'):
        st.write('Number:0')
-   elif(Education=='Male'):
+   elif(gender=='Male'):
        st.write('Number:1')  
+
    st.write("If don't show the Number, it is not in the data.")
 
 ##############################Predict##################################
