@@ -37,26 +37,22 @@ page_selected = st.sidebar.radio("Menu", ["Home", "Predict","Model"])
 ################## Home Page ###################################
 ################################################################
 if page_selected == "Home":  
-  st.write('This training dataset and testing data come from the public dataset. We want to know if we want to get income equal to or more than 50k, we have to meet what conditions.')
-  st.write('We use the original dataset to train.')
-  st.write("You can free choose the factors' range or values. Then you can see you choose factors how to affect income. ")
+   st.write('This training dataset and testing data come from the public dataset. We want to know if we want to get income equal to or more than 50k, we have to meet what conditions.')
+   st.write('We use the original dataset to train.')
+   st.write("You can free choose the factors' range or values. Then you can see you choose factors how to affect income. ")
     
     #######age to income >50K###################################
-  oda = st.checkbox('Training Dataset')
-  if oda:
-    st.write("You see the Training dataset factors how affect income.")
+   oda = st.checkbox('Training Dataset')
+   if oda:
+      st.write("You see the Training dataset factors how affect income.")
 
-    df = pd.read_csv('train1new.csv')
-    ages= df['age'].unique().tolist()
-    education = df['educational-num'].unique().tolist()
-    whours= df['hours-per-week'].unique().tolist()
-    sex= df['gender'].unique().tolist()
-    country = df['native-country'].unique().tolist()
-    income =df['income_>50K'].unique().tolist()
-
-    Choice = st.radio("The impact of different conditions on income.",('Age','Educational_Level','Work_hours_per_work','Country','Gender')) 
-
-    if Choice =='Age':
+      df = pd.read_csv('train1new.csv')
+      ages= df['age'].unique().tolist()
+      education = df['educational-num'].unique().tolist()
+      whours= df['hours-per-week'].unique().tolist()
+      sex= df['gender'].unique().tolist()
+      country = df['native-country'].unique().tolist()
+      income =df['income_>50K'].unique().tolist()
 
       st.title("The effect of different age ranges on income.")
       age_selection = st.slider('Age:',
@@ -80,30 +76,29 @@ if page_selected == "Home":
       st.plotly_chart(bar_chart)
 
 #####education #######################
-    elif Choice=='Educational_Level':
-       st.title("The effect of different Educational Level ranges on income.")
-       edulevel_selection = st.slider('Educational Level:',
+
+      st.title("The effect of different Educational Level ranges on income.")
+      edulevel_selection = st.slider('Educational Level:',
                                    min_value = min(education),
                                    max_value = max(education),
                                    value = (min(education),max(education)))
-       st.write('You selected:', edulevel_selection)
+      st.write('You selected:', edulevel_selection)
 
-       mask2 =(df['educational-num'].between(*edulevel_selection))
-       df_grouped2 = df[mask2].groupby(by=['income_>50K']).count()[['educational-num']]
-       df_grouped2 = df_grouped2.rename(columns={'educational-num':'count'})
-       df_grouped2 = df_grouped2.reset_index()
+      mask2 =(df['educational-num'].between(*edulevel_selection))
+      df_grouped2 = df[mask2].groupby(by=['income_>50K']).count()[['educational-num']]
+      df_grouped2 = df_grouped2.rename(columns={'educational-num':'count'})
+      df_grouped2 = df_grouped2.reset_index()
       
-       st.write('You can free choose the Educational level range. Then you can see want this different educational level range effect income.')
-       bar_chart2 = px.bar(df_grouped2,
+      st.write('You can free choose the Educational level range. Then you can see want this different educational level range effect income.')
+      bar_chart2 = px.bar(df_grouped2,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='income_>50K',
                        template='plotly_white')
-       st.plotly_chart(bar_chart2)
+      st.plotly_chart(bar_chart2)
 
 ########Work hours per week####################################################
-    elif Choice=='Work_hours_per_work':
       st.title("The effect of Work hours per week on income.")
       whours_selection = st.slider('Work hours per week:',
                                  min_value = min(whours),
@@ -123,62 +118,53 @@ if page_selected == "Home":
                        template='plotly_white')
       st.plotly_chart(bar_chart3)
 ##########Native Country###############################################
-    elif Choice=='Country':
-       st.title("The effect of differen countries on income.")
-       country_selection = st.selectbox('Native Country:',
-                                       country)
-       mask4 = df[(df['native-country']==country_selection)]
-       df_grouped4=mask4.groupby(by=['income_>50K']).count()[['native-country']]
-       df_grouped4 = df_grouped4.rename(columns={'native-country':'count'})
-       df_grouped4 = df_grouped4.reset_index()
-       st.write('You selected:', country_selection)
-       st.write('')
-       bar_chart4 = px.bar(df_grouped4,
-                       x='income_>50K',
-                       y='count',
-                       text='count',
-                       color='count',
-                       template='plotly_white')
-       st.plotly_chart(bar_chart4)
-############Gender#################################################################
-    else:
-        st.title('The effect of Gender on income.')
-        sex_selection = st.selectbox('Gender:',sex)
-        mask5 = df[(df['gender']==sex_selection )]
-        df_grouped5=mask5.groupby(by=['income_>50K']).count()[['gender']]
-        df_grouped5 = df_grouped5.rename(columns={'gender':'count'})
-        df_grouped5 = df_grouped5.reset_index()
-        st.write('You selected:', sex_selection)
-        st.write('')
-        bar_chart5 = px.bar(df_grouped5,
-                       x='income_>50K',
-                       y='count',
-                       text='count',
-                       color='count',
-                       template='plotly_white')
-        st.plotly_chart(bar_chart5)
-  st.write('We use this module to find which factors affect the income to 50k.')
-  st.write('Now we use test1.csv to predict which factors affect the income can get equal to or more than 50K.')
-  pda = st.checkbox('Predict Dataset')
-  if pda:
     
-    st.write("You can see we use pipeline to predict the 'income_>50K' values")
-    df = pd.read_csv('test1.csv')
-    pipeline = joblib.load('pipeline.pkl')
-    pf = pipeline.predict(df)
-    df["income_>50K"] = pf
+      st.title("The effect of differen countries on income.")
+      country_selection = st.selectbox('Native Country:',
+                                       country)
+      mask4 = df[(df['native-country']==country_selection)]
+      df_grouped4=mask4.groupby(by=['income_>50K']).count()[['native-country']]
+      df_grouped4 = df_grouped4.rename(columns={'native-country':'count'})
+      df_grouped4 = df_grouped4.reset_index()
+      st.write('You selected:', country_selection)
+      bar_chart4 = px.bar(df_grouped4,
+                       x='income_>50K',
+                       y='count',
+                       text='count',
+                       color='count',
+                       template='plotly_white')
+      st.plotly_chart(bar_chart4)
+############Gender#################################################################
+      st.title('The effect of Gender on income.')
+      sex_selection = st.selectbox('Gender:',sex)
+      mask5 = df[(df['gender']==sex_selection )]
+      df_grouped5=mask5.groupby(by=['income_>50K']).count()[['gender']]
+      df_grouped5 = df_grouped5.rename(columns={'gender':'count'})
+      df_grouped5 = df_grouped5.reset_index()
+      st.write('You selected:', sex_selection)
+      bar_chart5 = px.bar(df_grouped5,
+                       x='income_>50K',
+                       y='count',
+                       text='count',
+                       color='count',
+                       template='plotly_white')
+      st.plotly_chart(bar_chart5)
+   st.write('We use this module to find which factors affect the income to 50k.')
+   st.write('Now we use test1.csv to predict which factors affect the income can get equal to or more than 50K.')
+   pda = st.checkbox('Predict Dataset')
+   if pda:
+      st.write("You can see we use pipeline to predict the 'income_>50K' values")
+      df = pd.read_csv('test1.csv')
+      pipeline = joblib.load('pipeline.pkl')
+      pf = pipeline.predict(df)
+      df["income_>50K"] = pf
 
-    ages= df['age'].unique().tolist()
-    education = df['educational-num'].unique().tolist()
-    whours= df['hours-per-week'].unique().tolist()
-    sex= df['gender'].unique().tolist()
-    country = df['native-country'].unique().tolist()
-    income =df['income_>50K'].unique().tolist()
-
-    Choice = st.selectbox(
-     'The impact of different conditions on income.',
-     ('Age','Educational_Level','Work_hours_per_work','Country','Gender'))
-    if Choice =='Age':
+      ages= df['age'].unique().tolist()
+      education = df['educational-num'].unique().tolist()
+      whours= df['hours-per-week'].unique().tolist()
+      sex= df['gender'].unique().tolist()
+      country = df['native-country'].unique().tolist()
+      income =df['income_>50K'].unique().tolist()
 
       st.title("The effect of different age ranges on income.")
       age_selection = st.slider('Age:',
@@ -192,7 +178,6 @@ if page_selected == "Home":
       df_grouped = df_grouped.rename(columns={'age':'count'})
       df_grouped = df_grouped.reset_index()
 
-    
       bar_chart = px.bar(df_grouped,
                        x='income_>50K',
                        y='count',
@@ -202,30 +187,30 @@ if page_selected == "Home":
       st.plotly_chart(bar_chart)
 
 #####education #######################
-    elif Choice=='Educational_Level':
-       st.title("The effect of different Educational Level ranges on income.")
-       edulevel_selection = st.slider('Educational Level:',
+
+      st.title("The effect of different Educational Level ranges on income.")
+      edulevel_selection = st.slider('Educational Level:',
                                    min_value = min(education),
                                    max_value = max(education),
                                    value = (min(education),max(education)))
-       st.write('You selected:', edulevel_selection)
+      st.write('You selected:', edulevel_selection)
 
-       mask2 =(df['educational-num'].between(*edulevel_selection))
-       df_grouped2 = df[mask2].groupby(by=['income_>50K']).count()[['educational-num']]
-       df_grouped2 = df_grouped2.rename(columns={'educational-num':'count'})
-       df_grouped2 = df_grouped2.reset_index()
+      mask2 =(df['educational-num'].between(*edulevel_selection))
+      df_grouped2 = df[mask2].groupby(by=['income_>50K']).count()[['educational-num']]
+      df_grouped2 = df_grouped2.rename(columns={'educational-num':'count'})
+      df_grouped2 = df_grouped2.reset_index()
       
-       st.write('You can free choose the Educational level range. Then you can see want this different educational level range effect income.')
-       bar_chart2 = px.bar(df_grouped2,
+      st.write('You can free choose the Educational level range. Then you can see want this different educational level range effect income.')
+      bar_chart2 = px.bar(df_grouped2,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='income_>50K',
                        template='plotly_white')
-       st.plotly_chart(bar_chart2)
+      st.plotly_chart(bar_chart2)
 
 ########Work hours per week####################################################
-    elif Choice=='Work_hours_per_work':
+  
       st.title("The effect of Work hours per week on income.")
       whours_selection = st.slider('Work hours per week:',
                                  min_value = min(whours),
@@ -245,195 +230,200 @@ if page_selected == "Home":
                        template='plotly_white')
       st.plotly_chart(bar_chart3)
 ##########Native Country###############################################
-    elif Choice=='Country':
-       st.title("The effect of differen countries on income.")
-       country_selection = st.selectbox('Native Country:',
+   
+      st.title("The effect of differen countries on income.")
+      country_selection = st.selectbox('Native Country:',
                                        country)
-       mask4 = df[(df['native-country']==country_selection)]
-       df_grouped4=mask4.groupby(by=['income_>50K']).count()[['native-country']]
-       df_grouped4 = df_grouped4.rename(columns={'native-country':'count'})
-       df_grouped4 = df_grouped4.reset_index()
-       st.write('You selected:', country_selection)
-       st.write('')
-       bar_chart4 = px.bar(df_grouped4,
+      mask4 = df[(df['native-country']==country_selection)]
+      df_grouped4=mask4.groupby(by=['income_>50K']).count()[['native-country']]
+      df_grouped4 = df_grouped4.rename(columns={'native-country':'count'})
+      df_grouped4 = df_grouped4.reset_index()
+      st.write('You selected:', country_selection)
+      bar_chart4 = px.bar(df_grouped4,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='count',
                        template='plotly_white')
-       st.plotly_chart(bar_chart4)
+      st.plotly_chart(bar_chart4)
 ############Gender#################################################################
-    else:
-        st.title('The effect of Gender on income.')
-        sex_selection = st.selectbox('Gender:',sex)
-        mask5 = df[(df['gender']==sex_selection )]
-        df_grouped5=mask5.groupby(by=['income_>50K']).count()[['gender']]
-        df_grouped5 = df_grouped5.rename(columns={'gender':'count'})
-        df_grouped5 = df_grouped5.reset_index()
-        st.write('You selected:', sex_selection)
-        st.write('')
-        bar_chart5 = px.bar(df_grouped5,
+  
+      st.title('The effect of Gender on income.')
+      sex_selection = st.selectbox('Gender:',sex)
+      mask5 = df[(df['gender']==sex_selection )]
+      df_grouped5=mask5.groupby(by=['income_>50K']).count()[['gender']]
+      df_grouped5 = df_grouped5.rename(columns={'gender':'count'})
+      df_grouped5 = df_grouped5.reset_index()
+      st.write('You selected:', sex_selection)
+
+      bar_chart5 = px.bar(df_grouped5,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='count',
                        template='plotly_white')
-        st.plotly_chart(bar_chart5)
+      st.plotly_chart(bar_chart5)
 
-  st.write("You can upload your want to predict CSV file. We can use this app to help you predict. Or you can go to the web page 'predict' to predict if your income can get equal to or more than 50K. ")
-  upfile = st.file_uploader("Choose a file")
-  if upfile:
-    pipeline = joblib.load('pipeline.pkl')
-    df = pd.read_csv(upfile)
-    pf = pipeline.predict(df)
-    df["income_>50K"]=pf
-    st.write("This is your cvs file predict result.")
+   st.write("You can upload your want to predict CSV file. We can use this app to help you predict. Or you can go to the web page 'predict' to predict if your income can get equal to or more than 50K. ")
+   upfile = st.file_uploader("Choose a file")
+   if upfile:
+     pipeline = joblib.load('pipeline.pkl')
+     df = pd.read_csv(upfile)
+     pf = pipeline.predict(df)
+     df["income_>50K"]=pf
+     st.write("This is your cvs file predict result.")
     
-    df_c = st.checkbox('Predict Result')
-    if df_c:
+     df_c = st.checkbox('Predict Result')
+     if df_c:
         df
         
-    ages= df['age'].unique().tolist()
-    education = df['educational-num'].unique().tolist()
-    whours= df['hours-per-week'].unique().tolist()
-    sex= df['gender'].unique().tolist()
-    country = df['native-country'].unique().tolist()
-    income =df['income_>50K'].unique().tolist()
+     ages= df['age'].unique().tolist()
+     education = df['educational-num'].unique().tolist()
+     whours= df['hours-per-week'].unique().tolist()
+     sex= df['gender'].unique().tolist()
+     country = df['native-country'].unique().tolist()
+     income =df['income_>50K'].unique().tolist()
 
-    Choice = st.selectbox(
-     'The impact of different conditions on income.',
-     ('Age','Educational_Level','Work_hours_per_work','Country','Gender'))
-    if Choice =='Age':
-
-      st.title("The effect of different age ranges on income.")
-      age_selection = st.slider('Age:',
+     st.title("The effect of different age ranges on income.")
+     age_selection = st.slider('Age:',
                               min_value =min(ages),
                               max_value = max(ages),
                               value = (min(ages),max(ages)))
-      st.write('You selected:', age_selection)
+     st.write('You selected:', age_selection)
 
-      mask =(df['age'].between(*age_selection))
-      df_grouped =df[mask].groupby(by=['income_>50K']).count()[['age']]
-      df_grouped = df_grouped.rename(columns={'age':'count'})
-      df_grouped = df_grouped.reset_index()
-
+     mask =(df['age'].between(*age_selection))
+     df_grouped =df[mask].groupby(by=['income_>50K']).count()[['age']]
+     df_grouped = df_grouped.rename(columns={'age':'count'})
+     df_grouped = df_grouped.reset_index()
+ 
     
-      bar_chart = px.bar(df_grouped,
+     bar_chart = px.bar(df_grouped,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='income_>50K',
                        template='plotly_white')
-      st.plotly_chart(bar_chart)
+     st.plotly_chart(bar_chart)
 
 #####education #######################
-    elif Choice=='Educational_Level':
-       st.title("The effect of different Educational Level ranges on income.")
-       edulevel_selection = st.slider('Educational Level:',
+   
+     st.title("The effect of different Educational Level ranges on income.")
+     edulevel_selection = st.slider('Educational Level:',
                                    min_value = min(education),
                                    max_value = max(education),
                                    value = (min(education),max(education)))
-       st.write('You selected:', edulevel_selection)
+     st.write('You selected:', edulevel_selection)
 
-       mask2 =(df['educational-num'].between(*edulevel_selection))
-       df_grouped2 = df[mask2].groupby(by=['income_>50K']).count()[['educational-num']]
-       df_grouped2 = df_grouped2.rename(columns={'educational-num':'count'})
-       df_grouped2 = df_grouped2.reset_index()
+     mask2 =(df['educational-num'].between(*edulevel_selection))
+     df_grouped2 = df[mask2].groupby(by=['income_>50K']).count()[['educational-num']]
+     df_grouped2 = df_grouped2.rename(columns={'educational-num':'count'})
+     df_grouped2 = df_grouped2.reset_index()
       
-       st.write('You can free choose the Educational level range. Then you can see want this different educational level range effect income.')
-       bar_chart2 = px.bar(df_grouped2,
+     st.write('You can free choose the Educational level range. Then you can see want this different educational level range effect income.')
+     bar_chart2 = px.bar(df_grouped2,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='income_>50K',
                        template='plotly_white')
-       st.plotly_chart(bar_chart2)
+     st.plotly_chart(bar_chart2)
 
 ########Work hours per week####################################################
-    elif Choice=='Work_hours_per_work':
-      st.title("The effect of Work hours per week on income.")
-      whours_selection = st.slider('Work hours per week:',
+    
+     st.title("The effect of Work hours per week on income.")
+     whours_selection = st.slider('Work hours per week:',
                                  min_value = min(whours),
                                  max_value = max(whours),
                                  value = (min(whours),max(whours)))
-      st.write('You selected:', whours_selection)
-      mask3 =(df['hours-per-week'].between(*whours_selection))
-      df_grouped3=df[mask3].groupby(by=['income_>50K']).count()[['hours-per-week']]
-      df_grouped3 = df_grouped3.rename(columns={'hours-per-week':'count'})
-      df_grouped3 = df_grouped3.reset_index()
+     st.write('You selected:', whours_selection)
+     mask3 =(df['hours-per-week'].between(*whours_selection))
+     df_grouped3=df[mask3].groupby(by=['income_>50K']).count()[['hours-per-week']]
+     df_grouped3 = df_grouped3.rename(columns={'hours-per-week':'count'})
+     df_grouped3 = df_grouped3.reset_index()
 
-      bar_chart3 = px.bar(df_grouped3,
+     bar_chart3 = px.bar(df_grouped3,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='income_>50K',
                        template='plotly_white')
-      st.plotly_chart(bar_chart3)
+     st.plotly_chart(bar_chart3)
 ##########Native Country###############################################
-    elif Choice=='Country':
-       st.title("The effect of differen countries on income.")
-       country_selection = st.selectbox('Native Country:',
+     st.title("The effect of differen countries on income.")
+     country_selection = st.selectbox('Native Country:',
                                        country)
-       mask4 = df[(df['native-country']==country_selection)]
-       df_grouped4=mask4.groupby(by=['income_>50K']).count()[['native-country']]
-       df_grouped4 = df_grouped4.rename(columns={'native-country':'count'})
-       df_grouped4 = df_grouped4.reset_index()
-       st.write('You selected:', country_selection)
-       bar_chart4 = px.bar(df_grouped4,
+     mask4 = df[(df['native-country']==country_selection)]
+     df_grouped4=mask4.groupby(by=['income_>50K']).count()[['native-country']]
+     df_grouped4 = df_grouped4.rename(columns={'native-country':'count'})
+     df_grouped4 = df_grouped4.reset_index()
+     st.write('You selected:', country_selection)
+     bar_chart4 = px.bar(df_grouped4,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='count',
                        template='plotly_white')
-       st.plotly_chart(bar_chart4)
+     st.plotly_chart(bar_chart4)
 ############Gender#################################################################
-    else:
-        st.title('The effect of Gender on income.')
-        sex_selection = st.selectbox('Gender:',sex)
-        mask5 = df[(df['gender']==sex_selection )]
-        df_grouped5=mask5.groupby(by=['income_>50K']).count()[['gender']]
-        df_grouped5 = df_grouped5.rename(columns={'gender':'count'})
-        df_grouped5 = df_grouped5.reset_index()
-        st.write('You selected:', sex_selection)
-        st.write('')
-        bar_chart5 = px.bar(df_grouped5,
+
+     st.title('The effect of Gender on income.')
+     sex_selection = st.selectbox('Gender:',sex)
+     mask5 = df[(df['gender']==sex_selection )]
+     df_grouped5=mask5.groupby(by=['income_>50K']).count()[['gender']]
+     df_grouped5 = df_grouped5.rename(columns={'gender':'count'})
+     df_grouped5 = df_grouped5.reset_index()
+     st.write('You selected:', sex_selection)
+   
+     bar_chart5 = px.bar(df_grouped5,
                        x='income_>50K',
                        y='count',
                        text='count',
                        color='count',
                        template='plotly_white')
-        st.plotly_chart(bar_chart5)
+     st.plotly_chart(bar_chart5)
 
-  st.write("This page just describes this app can do what. If you want to know more about how to build this model and pipeline, you can go to the web page 'Model'. The 'Model' more clearly describes the model and pipeline how to build.")
-  st.write('Country and Educational levels have corresponding numbers. This is the corresponding numbers table.') 
+   st.write("This page just describes this app can do what. If you want to know more about how to build this model and pipeline, you can go to the web page 'Model'. The 'Model' more clearly describes the model and pipeline how to build.")
+   st.write('Country and Educational levels have corresponding numbers. This is the corresponding numbers table.') 
+   data = st.checkbox('Corresponding Numbers table')
+   if data:
+       df_n = pd.read_csv('transfer_data.csv')
+       df_n
+   df = pd.read_csv('transfer_data.csv')
+   Country =st.text_input('Country Number:',)
+   a = df[df['native-country']==Country].index.tolist()
+   st.write('Number:', df['num1'].loc[a])
 
-  data = st.checkbox('Corresponding Numbers table')
-  if data:
-   df_n = pd.read_csv('transfer_data.csv')
-   df_n
+   Education = st.text_input('Educational Level:',)
+   b = df[df['educational-num']==Education].index.tolist()
+   st.write('Number:', df['num2'].loc[b])
+
+   gender = st.text_input('Gender:',)
+   c = df[df['gender']==gender].index.tolist()
+   st.write('Number:', df['num3'].loc[c])
+   st.write("If don't show the Number, it is not in the data.")
+
 ##############################Predict##################################
-
 if page_selected =="Predict":
-    st.write('Country and Educational levels have corresponding numbers. This is the corresponding numbers table.') 
-    data = st.checkbox('Corresponding Numbers table')
-    if data:
-     df_n = pd.read_csv('transfer_data.csv')
-     df_n
+     st.write('Country and Educational levels have corresponding numbers. This is the corresponding numbers table.') 
+     data = st.checkbox('Corresponding Numbers table')
+     if data:
+       df_n = pd.read_csv('transfer_data.csv')
+       df_n
 
-    Age=st.text_input('Age:',)
-    Education = st.text_input('Educational Level:',)
-    gender = st.text_input('Gender:',)
-    Whours = st.text_input('Work hours per week:',)
-    Country = st.text_input('Country:',)
-    df = pd.DataFrame([{'age':Age,'educational-num':Education,'gender':gender,'hours-per-week':Whours,'native-country':Country}])
-    pipeline = joblib.load('pipeline.pkl')
-    predictions = pipeline.predict(df)
+     Age=st.text_input('Age:',)
+     Education = st.text_input('Educational Level:',)
+     gender = st.text_input('Gender:',)
+     Whours = st.text_input('Work hours per week:',)
+     Country = st.text_input('Country:',)
+     df = pd.DataFrame([{'age':Age,'educational-num':Education,'gender':gender,'hours-per-week':Whours,'native-country':Country}])
+     pipeline = joblib.load('pipeline.pkl')
+     predictions = pipeline.predict(df)
     #return predictions or outcomes
-    prf=np.average(predictions)
-    if prf == 1:
+     prf=np.average(predictions)
+     if prf == 1:
         st.info('You can get income_> 50K!!!')
         st.balloons()
-    else:
+     else:
         st.info('You can not get income_> 50K.')
         st.snow()
     
