@@ -392,8 +392,7 @@ if page_selected == "Home":
    df = pd.read_csv('transfer_data.csv')
    Country =st.text_input('Country Number:',)
    a = df[df['native-country']==Country].index.tolist()
-   a1=df['num1'].loc[a]
-   st.write('Number:', a1)
+   st.write('Number:', df['num1'].loc[a])
    
 
    Education = st.text_input('Educational Level:',)
