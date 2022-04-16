@@ -392,18 +392,20 @@ if page_selected == "Home":
 
 ##############################Predict##################################
 if page_selected =="Predict":
-    st.write('Country and Educational levels have corresponding numbers. This is the corresponding numbers table.') 
-    data = st.checkbox('Corresponding Numbers table')
-    if data:
-       df_n = pd.read_csv('transfer_data.csv')
-       df_n
+    st.write('Country and Educational levels have corresponding numbers.') 
     
    
     Age1 = st.text_input('Age:',)
     Education1 = st.text_input('Educational Level:',)
+    edf=pd.read_csv('educational_data.csv')
+    edf
     gender1 = st.text_input('Gender:',)
+    gdf=pd.read_csv('gender_data.csv')
+    gdf
     Whours1 = st.text_input('Work hours per week:',)
     Country1 = st.text_input('Country:',)
+    cdf=pd.read_csv('country_data.csv')
+    cdf
     df1 = pd.DataFrame([{'age':Age1,'educational-num':Education1,'gender':gender1,'hours-per-week':Whours1,'native-country':Country1}])
     pipeline = joblib.load('pipeline.pkl')
     predictions = pipeline.predict(df1)
