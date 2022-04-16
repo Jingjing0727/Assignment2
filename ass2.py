@@ -392,12 +392,14 @@ if page_selected == "Home":
 
 ##############################Predict##################################
 if page_selected =="Predict":
-     st.write('Country and Educational levels have corresponding numbers. This is the corresponding numbers table.') 
-     data = st.checkbox('Corresponding Numbers table')
-     if data:
+    st.write('Country and Educational levels have corresponding numbers. This is the corresponding numbers table.') 
+    data = st.checkbox('Corresponding Numbers table')
+    if data:
        df_n = pd.read_csv('transfer_data.csv')
        df_n
-     df = pd.read_csv('transfer_data.csv')
+    
+    data1 = st.checkbox('Help you fast to finde to CorrespondNumbers')
+    if data1:
      Country =st.text_input('Country Number:',)
      if (Country == 'Cambodia'):
        st.write('Number:1')
@@ -521,22 +523,22 @@ if page_selected =="Predict":
      elif(gender=='Male'):
        st.write('Number:1')  
 
-     st.write("If don't show the Number, it is not in the data. Or you can see the Corresponding Numbers table.")
+     st.write("If don't show the Number, it is not in the data. You can see the Corresponding Numbers table.")
     
-     Age1=st.text_input('Age:',)
-     Education1 = st.text_input('Educational Level:',)
-     gender1 = st.text_input('Gender:',)
-     Whours1 = st.text_input('Work hours per week:',)
-     Country1 = st.text_input('Country:',)
-     df1 = pd.DataFrame([{'age':Age1,'educational-num':Education1,'gender':gender1,'hours-per-week':Whours1,'native-country':Country1}])
-     pipeline = joblib.load('pipeline.pkl')
-     predictions = pipeline.predict(df1)
+    Age1 = st.text_input('Age:',)
+    Education1 = st.text_input('Educational Level:',)
+    gender1 = st.text_input('Gender:',)
+    Whours1 = st.text_input('Work hours per week:',)
+    Country1 = st.text_input('Country:',)
+    df1 = pd.DataFrame([{'age':Age1,'educational-num':Education1,'gender':gender1,'hours-per-week':Whours1,'native-country':Country1}])
+    pipeline = joblib.load('pipeline.pkl')
+    predictions = pipeline.predict(df1)
     #return predictions or outcomes
-     prf=np.average(predictions)
-     if prf == 1:
+    prf=np.average(predictions)
+    if prf == 1:
         st.info('You can get income_> 50K!!!')
         st.balloons()
-     else:
+    else:
         st.info('You can not get income_> 50K.')
         st.snow()
     
