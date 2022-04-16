@@ -513,7 +513,7 @@ if page_selected == "Home":
    elif(gender=='Male'):
        st.write('Number:1')  
 
-   st.write("If don't show the Number, it is not in the data.")
+   st.write("If don't show the Number, it is not in the data. Or you can see the Corresponding Numbers table.")
 
 ##############################Predict##################################
 if page_selected =="Predict":
