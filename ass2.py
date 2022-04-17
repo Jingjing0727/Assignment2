@@ -32,12 +32,12 @@ page_selected = st.sidebar.radio("Menu", ["Home", "Predict","Model"])
 if page_selected == "Home":  
    st.header("Predicting which people could get more than 50K salary.")
    st.write("Our application uses Artificial Intelligence to predict which factors affect people's income >50K.")
-   st.markdown('---')
-
    st.markdown("""
    Emojis: :+1: :sunglasses:
    From: [Github](https://github.com/Jingjing0727/Assignment2)""")
-   st.write('This Github url have all my file about this assignment2.')
+   st.write('This Github url have all my file about this assignment2.') 
+   st.markdown('---')
+
    st.write('This training dataset and testing data come from the public dataset. We want to know if we want to get income equal to or more than 50k, we have to meet what conditions.')
    st.write('We use the original dataset to train.')
    st.write("You see the Training dataset factors that affect income.")
