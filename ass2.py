@@ -154,8 +154,6 @@ if page_selected == "Home":
    st.write('We use this module to find which factors affect the income to 50k.')
    
    if option =='Predict Dataset':
-      st.header('You can predict if you can get income_>50K.')
-      st.write("We use pipeline to predict the 'income_>50K' values")
       df = pd.read_csv('test1.csv')
       pipeline = joblib.load('pipeline.pkl')
       pf = pipeline.predict(df)
@@ -398,6 +396,8 @@ if page_selected == "Home":
 
 ##############################Predict##################################
 if page_selected =="Predict":
+    st.header('You can predict if you can get income_>50K.')
+    st.write("We use pipeline to predict the 'income_>50K' values")
     st.write(' Educational levels ,Gender and Country have corresponding numbers.') 
     st.write('This place reports an error because we need to input some numbers in the box. When we input some numbers, it can predict if you can get income_>50K.')
     
