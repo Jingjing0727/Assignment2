@@ -397,6 +397,7 @@ if page_selected == "Home":
 ##############################Predict##################################
 if page_selected =="Predict":
     st.write(' Educational levels ,Gender and Country have corresponding numbers.') 
+    st.write('This place reports an error because we need to input some numbers in the box. When we input some numbers, it can predict if you can get income_>50K.')
     
    
     Age1 = st.text_input('Age:',)
@@ -421,7 +422,7 @@ if page_selected =="Predict":
     elif prf==0:
         st.info('You can not get income_> 50K.')
         st.snow()
-    st.write('This place reports an error because we need to input some numbers in the box. When we input some numbers, it can predict if you can get income_>50K.')
+    
 
 ##############################Model####################################
 if page_selected == "Model":
