@@ -263,6 +263,8 @@ if page_selected == "Home":
                        color='count',
                        template='plotly_white')
       st.plotly_chart(bar_chart5)
+   st.write('Then We use test1.csv to predict which factors affect the income can get equal to or more than 50K. We go back to choose the predicting dataset to see the result.')
+   st.empty()
 
    st.write("You can upload your want to predict CSV file. We can use this app to help you predict. Or you can go to the web page 'predict' to predict if your income can get equal to or more than 50K. ")
    upfile = st.file_uploader("Choose a file")
@@ -381,8 +383,7 @@ if page_selected == "Home":
                        color='count',
                        template='plotly_white')
      st.plotly_chart(bar_chart5)
-   st.write('We use test1.csv to predict which factors affect the income can get equal to or more than 50K.')
-   st.empty()
+
 
    st.write("This page just describes this app can do what. If you want to know more about how to build this model and pipeline, you can go to the web page 'Model'. The 'Model' more clearly describes the model and pipeline how to build.")
    st.write('Country,Educational levels and Gender have corresponding numbers. This is the corresponding numbers table.') 
