@@ -426,6 +426,7 @@ if page_selected =="Predict":
 
 ##############################Model####################################
 if page_selected == "Model":
+  st.title('How to build the model and pipeline.')
   st.write("This is my original data. You can see native_country has many different names in train.csv. 'Show train dataframe has a training dataset and some bar chart. You can use it to know this data factors type.  ")
 
   st.write('This dataset data is clean.Now this dataset not missing value.')
