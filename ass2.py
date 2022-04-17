@@ -39,10 +39,11 @@ page_selected = st.sidebar.radio("Menu", ["Home", "Predict","Model"])
 if page_selected == "Home":  
    st.write('This training dataset and testing data come from the public dataset. We want to know if we want to get income equal to or more than 50k, we have to meet what conditions.')
    st.write('We use the original dataset to train.')
-   st.write("You see the Training dataset factors how affect income.")
-   st.write("You can free choose the factors' range or values. Then you can see you choose factors how to affect income. ")
+   st.write("You see the Training dataset factors that affect income.")
+   st.write("You can free choose the factors' range or values. Then you can see you choose factors how to affect income. These factors are Age, Educational Level, Work hours per week, Country, and Gender. ")
     
     #######age to income >50K###################################
+   
    option = st.selectbox("You can choose the Training Dataset and Predict Dataset Analysis. ",("Training Dataset","Predict Dataset"))
    if option =='Training Dataset':
        
@@ -150,7 +151,7 @@ if page_selected == "Home":
                        template='plotly_white')
       st.plotly_chart(bar_chart5)
    st.write('We use this module to find which factors affect the income to 50k.')
-   st.write('Now we use test1.csv to predict which factors affect the income can get equal to or more than 50K.')
+   
    if option =='Predict Dataset':
       st.write("You can see we use pipeline to predict the 'income_>50K' values")
       df = pd.read_csv('test1.csv')
@@ -380,9 +381,11 @@ if page_selected == "Home":
                        color='count',
                        template='plotly_white')
      st.plotly_chart(bar_chart5)
+   st.write('We use test1.csv to predict which factors affect the income can get equal to or more than 50K.')
+   st.empty()
 
    st.write("This page just describes this app can do what. If you want to know more about how to build this model and pipeline, you can go to the web page 'Model'. The 'Model' more clearly describes the model and pipeline how to build.")
-   st.write('Country and Educational levels have corresponding numbers. This is the corresponding numbers table.') 
+   st.write('Country,Educational levels and Gender have corresponding numbers. This is the corresponding numbers table.') 
    data = st.checkbox('Corresponding Numbers table')
    if data:
        df_n = pd.read_csv('transfer_data.csv')
