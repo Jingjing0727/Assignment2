@@ -421,7 +421,7 @@ if page_selected =="Predict":
     elif prf==0:
         st.info('You can not get income_> 50K.')
         st.snow()
-    
+    st.write('This place reports an error because we need to input some numbers in the box. When we input some numbers, it can predict if you can get income_>50K.')
 
 ##############################Model####################################
 if page_selected == "Model":
