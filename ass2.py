@@ -154,7 +154,8 @@ if page_selected == "Home":
    st.write('We use this module to find which factors affect the income to 50k.')
    
    if option =='Predict Dataset':
-      st.write("You can see we use pipeline to predict the 'income_>50K' values")
+      st.header('You can predict if you can get income_>50K.')
+      st.write("We use pipeline to predict the 'income_>50K' values")
       df = pd.read_csv('test1.csv')
       pipeline = joblib.load('pipeline.pkl')
       pf = pipeline.predict(df)
